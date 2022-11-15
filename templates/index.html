@@ -7,7 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Prediction</title>
 </head>
-<body class="flex justify-center align-center">
+<body class="flex justify-center align-center bg-slate-300">
+    
     <div class="mt-6 flex-col justify-center align-center max-w-md max-h-md shadow-lg p-5 rounded-md">
 
         <h1 class="text-2xl text-sky-900"> Student engagement Prediction </h1>
@@ -18,7 +19,7 @@
             <form action="{{url_for('predict')}}", method="post">
 
                 <div>
-                    <select name="" id="" class="w-full h-10 border-2 mt-4 focus:border-sky-700 focus:outline-none ">
+                    <select name="course_id" id="" class="w-full h-10 border-2 mt-4 focus:border-sky-700 focus:outline-none " required>
                         <option value="">--Select--</option>
                         {% for item in courses %}
                             <option value="{{item[0]}}" >{{ item[1] }}</option>
@@ -31,7 +32,7 @@
                 <div><input type="date" name="date_watched" placeholder="Date watched" class="rounded-md border-2 mt-4 h-10 w-full focus:outline-none focus:border-sky-700 focus:ring-sky-700 inline-block placeholder:italic placeholder:text-slate-400 placeholder:pl-2 " required></div>
 
                 <div>
-                    <select name="" id="" class="w-full h-10 border-2 mt-4 focus:border-sky-700 focus:outline-none ">
+                    <select name="country_id" id="" class="w-full h-10 border-2 mt-4 focus:border-sky-700 focus:outline-none " required>
                         <option value="">--Select--</option>
                         {% for i in countries %}
                             <option value="{{i[0]}}" >{{ i[1] }}</option>
@@ -39,7 +40,7 @@
                     </select>
                 </div>
 
-                <div><input type="date" name="date_regisyered" placeholder="Date Registered" class="rounded-md border-2 mt-4 h-10 w-full focus:outline-none focus:border-sky-700 focus:ring-sky-700 inline-block placeholder:italic placeholder:text-slate-400 placeholder:pl-2 " required></div>
+                <div><input type="date" name="date_registered" placeholder="Date Registered" class="rounded-md border-2 mt-4 h-10 w-full focus:outline-none focus:border-sky-700 focus:ring-sky-700 inline-block placeholder:italic placeholder:text-slate-400 placeholder:pl-2 " required></div>
 
                 <div><input type="number" min="0" max="5" name="course_rating" placeholder="Course rating" class="rounded-md border-2 mt-4 h-10 w-full focus:outline-none focus:border-sky-700 focus:ring-sky-700 inline-block placeholder:italic placeholder:text-slate-400 placeholder:pl-2 " required></div>
 
@@ -48,8 +49,6 @@
                 <button type="submit" class="border-2 border-sky-500 text-2xl rounded-lg bg-sky-500 h-10 w-28 mt-5 text-white hover:bg-sky-600 focus:ring-2 ">Predict</button>
         </form>
         </div>
-        
-        <p>{{ prediction_text }}</p>
-    </div>
+        </div>
 </body>
 </html>

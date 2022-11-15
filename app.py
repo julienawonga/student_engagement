@@ -2,6 +2,7 @@ import numpy as np
 from flask import Flask, request, jsonify, render_template
 import pickle
 import pandas as pd
+from datetime import datetime
 
 courses = pd.read_csv('./365_database/365_course_info.csv').values.tolist()
 
@@ -19,13 +20,27 @@ def predict():
     '''
     For rendering results on HTML GUI
     '''
-    int_features = [int(x) for x in request.form.values()]
-    final_features = [np.array(int_features)]
-    prediction = model.predict(final_features)
+    #int_features = [int(x) for x in request.form.values()]
 
+    course = int(request.form['course_id'])
+    minutes = int(request.form['minutes_watched'])
+    country = int(request.form['country_id'])
+    course_rating = int(request.form['course_rating'])
+
+    period = pd.to_datetime(request.form['date_watched']) - pd.to_datetime(request.form['date_registered'])
+    period_bf_rating = pd.to_datetime(request.form['date_rated']) - pd.to_datetime(request.form['date_watched'])
+    
+    period = np.abs(int(period.days))
+    period_bf_rating = np.abs(int(period_bf_rating.days))
+
+    final_features = [course, minutes, country, course_rating, period, period_bf_rating]
+    prediction = model.predict([final_features])
+    proba = model.predict_proba([final_features])
     output = prediction[0]
+    yes = round(proba[0][1]*100, 2) 
+    no = round(proba[0][0]*100, 2)
 
-    return render_template('index.html', prediction_text="")
+    return render_template('result.html', predictiont=output, yes=yes, no=no)
 
 if __name__ == "__main__":
     app.run(debug=True)
