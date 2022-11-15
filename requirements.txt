@@ -1,0 +1,12 @@
+flask=2.2.2=pypi_0
+gunicorn=20.1.0=pypi_0
+itsdangerous=2.1.2=pypi_0
+jinja2=3.0.3=pyhd3eb1b0_0
+markupsafe=2.1.1=py38h2bbff1b_0
+matplotlib=3.5.2=py38haa95532_0
+numpy=1.21.5=py38h7a0a035_3
+pandas=1.4.3=py38hd77b12b_0
+scikit-learn=1.1.1=py38hd77b12b_0
+scipy=1.7.3=py38h7a0a035_2
+werkzeug=2.2.2=pypi_0
+
